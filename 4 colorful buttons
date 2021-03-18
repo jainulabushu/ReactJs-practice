@@ -1,0 +1,48 @@
+1. index.js remains same
+
+2. App.js
+
+import React from 'react'
+import PlusButton from './PlusButton/PlusButton.js'
+
+
+const App = () => {
+    return <div>
+        <PlusButton value={1} bg={'pink'} outputBG={"blue"}/>
+        <PlusButton value={2} bg={'green'} outputBG={"grey"}/>
+        <PlusButton value={3} bg={'red'} outputBG={"pink"}/>
+        <PlusButton value={4} bg={'yellow'} outputBG={"brown"}/>     
+    </div>
+    
+}
+
+export default App
+
+3. PlusButton.js
+
+import React, {useState} from 'react'
+
+const PlusButton = (props) => {
+
+    const [initialCount, setInitialCount] = useState(0)
+
+    const buttonClick = () => {
+        return setInitialCount(initialCount + props.value)
+    }
+
+    const buttonStyle = {
+        background: props.bg
+    }
+    const outputStyle = {
+        background: props.outputBG
+    }
+
+    return <div>
+        <button style = {buttonStyle} onClick={buttonClick}>{props.value}</button>        
+        <div style = {outputStyle} >{initialCount}</div>
+    </div>
+        
+  
+}
+
+export default PlusButton
