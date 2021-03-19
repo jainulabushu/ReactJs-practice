@@ -1,0 +1,79 @@
+1. index.js remains same
+
+2. App.js
+
+import React from 'react'
+import PlusButton from './PlusButton/PlusButton.js'
+import SearchTab from './SearchTab/SearchTab'
+
+
+const App = () => {
+    return <div>
+        <PlusButton value={1} bg={'pink'} outputBG={"blue"}/>
+        <PlusButton value={2} bg={'green'} outputBG={"grey"}/>
+        <SearchTab value={'groups'}/>
+        <PlusButton value={3} bg={'red'} outputBG={"pink"}/>
+        <PlusButton value={4} bg={'yellow'} outputBG={"brown"}/>     
+        <SearchTab value={'friends'}/>
+    </div>
+    
+}
+
+export default App
+
+3. SearchTab
+
+import React, {useState} from 'react'
+
+const SearchTab = (props) => {
+
+    const [searchValue, setSearchValue] = useState('')
+
+    const clearButton = () => {
+        setSearchValue('')
+    }
+    const searchInputChange = (event) => {
+        setSearchValue(event.target.value)
+    }
+
+    const shouldShowButton = searchValue.length >0
+
+
+    return <div>
+        <input type='text' value={searchValue} onChange={searchInputChange}></input>
+        {shouldShowButton && <button onClick={clearButton} >clear</button>}
+    </div>
+        
+
+}
+
+export default SearchTab
+
+4. PlusButton
+
+import React, {useState} from 'react'
+
+const PlusButton = (props) => {
+
+    const [initialCount, setInitialCount] = useState(0)
+
+    const buttonClick = () => {
+        return setInitialCount(initialCount + props.value)
+    }
+
+    const buttonStyle = {
+        background: props.bg
+    }
+    const outputStyle = {
+        background: props.outputBG
+    }
+
+    return <div>
+        <button style = {buttonStyle} onClick={buttonClick}>{props.value}</button>        
+        <div style = {outputStyle} >{initialCount}</div>
+    </div>
+        
+  
+}
+
+export default PlusButton
